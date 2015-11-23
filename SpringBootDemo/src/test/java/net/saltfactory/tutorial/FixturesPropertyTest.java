@@ -7,7 +7,6 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -15,7 +14,7 @@ import static org.hamcrest.core.Is.is;
 /**
  * filename : FixturespropertyTest.java
  * author   : saltfactory<saltfactory@gmail.com>
- * created  : 11/23/15
+ * created  : 11/23/15.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SpringBootDemoApplication.class)
@@ -25,8 +24,15 @@ public class FixturesPropertyTest {
 
     @Test
     public void testGetArticles() {
-        List<Map> articles = fixturesProperty.getArticles();
+        List<Article> articles = fixturesProperty.getArticles();
         assertThat(articles.size(), is(3));
     }
 
+    @Test
+    public void testGetCommentsByArticle() {
+        List<Article> articles = fixturesProperty.getArticles();
+        Article article = articles.get(0);
+        List<Comment> comments = article.getComments();
+        assertThat(comments.size(), is(2));
+    }
 }

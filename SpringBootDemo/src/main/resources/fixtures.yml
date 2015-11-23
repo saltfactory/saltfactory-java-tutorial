@@ -1,6 +1,7 @@
 fixtures:
   articles:
-    - id: 1
+    -
+      id: 1
       title: title1
       content: content1
       comments:
@@ -12,7 +13,8 @@ fixtures:
           id: 11
           articleId: 1
           content: comment12
-    - id: 2
+    -
+      id: 2
       title: title2
       content: content2
       comments:
@@ -22,7 +24,8 @@ fixtures:
         - id: 21
           articleId: 2
           content: comment22
-    - id: 3
+    -
+      id: 3
       title: title3
       content: content3
       comments:
