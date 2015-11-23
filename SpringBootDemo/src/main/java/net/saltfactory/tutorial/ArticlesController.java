@@ -1,9 +1,6 @@
 package net.saltfactory.tutorial;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,20 +9,17 @@ import java.util.List;
  * Created by saltfactory<saltfactory@gmail.com> on 11/21/15.
  */
 @RestController
-@EnableAutoConfiguration
-@Configuration
-@ComponentScan
 public class ArticlesController {
     @Autowired
     ArticlesService articlesService;
 
-    @RequestMapping(value = "/api/articles", method = RequestMethod.GET, headers = "Accept=application/json")
+    @RequestMapping(value = "/api/articles", method = RequestMethod.GET)
     @ResponseBody
     public List<Article> index() {
         return articlesService.getArticles();
     }
 
-    @RequestMapping(value = "/api/articles/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+    @RequestMapping(value = "/api/articles/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Article show(@PathVariable(value = "id") long id) {
         return articlesService.getArticle(id);
@@ -54,12 +48,6 @@ public class ArticlesController {
     public List<Article> destroy(@PathVariable(value = "id") long id) {
         return articlesService.deleteArticle(id);
     }
-
-
-
-
-
-
 
 
 }

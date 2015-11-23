@@ -2,6 +2,7 @@ package net.saltfactory.tutorial;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.net.httpserver.Headers;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,11 +13,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+
+import java.util.ArrayList;
 import java.util.List;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 /**
@@ -51,9 +54,14 @@ public class ArticlesControllerTest {
         List<Article> articles = articlesService.getArticles();
         String jsonString = this.jsonStringFromObject(articles);
 
-        mockMvc.perform(get("/api/articles"))
+        MvcResult result = mockMvc.perform(get("/api/articles"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo(jsonString)));
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().string(equalTo(jsonString)))
+                .andReturn();
+
+        logger.info(result.getResponse().getContentAsString());
+
     }
 
     @Test
@@ -62,9 +70,11 @@ public class ArticlesControllerTest {
         Article article = articlesService.getArticle(id);
         String jsonString = this.jsonStringFromObject(article);
 
-        mockMvc.perform(get("/api/articles/{id}", id))
+        MvcResult result = mockMvc.perform(get("/api/articles/{id}", id))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo(jsonString)));
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(content().string(equalTo(jsonString))).andReturn();
+        logger.info(result.getResponse().getContentAsString());
     }
 
     @Test
@@ -72,6 +82,13 @@ public class ArticlesControllerTest {
         Article article = new Article();
         article.setTitle("testing create article");
         article.setContent("test content");
+
+        Comment comment = new Comment();
+        comment.setContent("test comment1");
+        List<Comment> comments = new ArrayList<>();
+        comments.add(comment);
+
+        article.setComments(comments);
 
         String jsonString = this.jsonStringFromObject(article);
 
