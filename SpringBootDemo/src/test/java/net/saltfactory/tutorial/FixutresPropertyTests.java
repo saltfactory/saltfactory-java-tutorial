@@ -18,7 +18,7 @@ import static org.hamcrest.core.Is.is;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SpringBootDemoApplication.class)
-public class FixutresPropertyTest {
+public class FixutresPropertyTests {
     @Autowired
     private FixturesProperty fixturesProperty;
 

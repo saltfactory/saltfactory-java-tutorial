@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SpringBootDemoApplication.class)
-public class ArticlesServiceTest {
+public class ArticlesServiceTests {
 
     @Autowired
     ArticlesService articlesService;
