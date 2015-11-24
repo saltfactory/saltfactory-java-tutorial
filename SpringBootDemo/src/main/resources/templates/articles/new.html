@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SpringBootDemo</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<h1>New Article</h1>
+
+<form action="#" th:action="@{/articles}"
+      th:object="${article}"
+      method="post" enctype="multipart/form-data">
+    <p>title: <input type="text" th:field="*{title}" /></p>
+    <p>content:
+        <textarea th:field="*{content}"></textarea>
+    </p>
+    <!--<p>file:-->
+        <!--<input type="file" th:field="*{file}"/>-->
+    <!--</p>-->
+
+    <input type="submit" value="submit" />
+</form>
+
+</body>
+</html>
