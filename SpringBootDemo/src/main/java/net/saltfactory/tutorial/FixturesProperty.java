@@ -11,7 +11,7 @@ import java.util.List;
  * Created by saltfactory<saltfactory@gmail.com> on 11/21/15.
  */
 @Component
-@ConfigurationProperties(locations = {"fixtures.yml"}, prefix = "fixtures")
+@ConfigurationProperties(locations = {"classpath:fixtures.yml"}, prefix = "fixtures")
 public class FixturesProperty {
     private List<Article> articles = new ArrayList<>();
 

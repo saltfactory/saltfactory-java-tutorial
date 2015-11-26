@@ -114,7 +114,6 @@ public class ArticlesControllerTests {
                 .andReturn();
 
         logger.info(result.getResponse().getContentAsString());
-
     }
 
     @Test
